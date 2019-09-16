@@ -1,6 +1,7 @@
 package com.example.fragmentapp.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,8 @@ import com.example.fragmentapp.util.SongUtil;
 
 public class SongDetailFragment extends Fragment {
 
+    private static final String LOG = SongDetailFragment.class.getName();
+
     // Song includes the song title and detail.
     public Song mSong;
 
@@ -23,14 +26,18 @@ public class SongDetailFragment extends Fragment {
     }
 
     @Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         if (getArguments().containsKey(SongUtil.SONG_ID_KEY)) {
             // Load the content specified by the fragment arguments.
             mSong = new SongUtil().getSongList().get(getArguments()
                     .getInt(SongUtil.SONG_ID_KEY));
+
+            Log.i(LOG,"onSaveInstanceState | mSong title : " + mSong.getSongTitle());
+            Log.i(LOG,"onSaveInstanceState | mSong detail : " + mSong.getDetails());
         }
     }
+
 
     /**
      * This method inflates the fragment's view and shows the song
@@ -49,6 +56,8 @@ public class SongDetailFragment extends Fragment {
 
         // Show the detail information in a TextView.
         if (mSong != null) {
+            Log.i(LOG,"onCreateView | mSong title : " + mSong.getSongTitle());
+            Log.i(LOG,"onCreateView | mSong detail : " + mSong.getDetails());
             ((TextView) rootView.findViewById(R.id.song_detail))
                     .setText(mSong.getDetails());
         }

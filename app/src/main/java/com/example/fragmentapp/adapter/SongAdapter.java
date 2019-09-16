@@ -92,8 +92,10 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongAdapterVie
             // Get selected song position in song list.
             int selectedSong = getAdapterPosition();
 
-            if (mTwoPane) {
+            Log.i(LOG,"onClick | selectedSong : " + selectedSong);
 
+            if (mTwoPane) {
+                Log.i(LOG,"onClick | if (mTwoPane) : " + mTwoPane);
                 // Create new instance of fragment and add it to
                 // the activity using a fragment transaction.
                 SongDetailFragment fragment =
@@ -103,6 +105,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongAdapterVie
                         .addToBackStack(null)
                         .commit();
             } else {
+                Log.i(LOG,"onClick | else mTwoPane : " + mTwoPane);
                 // Send an intent to the SongDetailActivity
                 // with intent extra of the selected song position.
                 Context context = view.getContext();
